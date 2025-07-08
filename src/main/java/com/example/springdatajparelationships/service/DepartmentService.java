@@ -37,8 +37,16 @@ public class DepartmentService {
         return null;
     }
 
-    public boolean deleteDepartment(long id) {
-        if (departmentRepository.existsById(id)) {
+    public boolean deleteDepartment(Long id) {
+        Department department = departmentRepository.findById(id).orElse(null);
+        if (department != null) {
+            // Set students department to null
+            for (Student student : department.getStudents()) {
+                student.setDepartment(null);
+                studentRepository.save(student);
+            }
+
+            // Then delete the department
             departmentRepository.deleteById(id);
             return true;
         }
