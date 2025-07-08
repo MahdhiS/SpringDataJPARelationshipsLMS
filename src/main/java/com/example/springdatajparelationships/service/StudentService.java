@@ -38,7 +38,7 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Student updateDetails(int id, Student updatedStudent) {
+    public Student updateDetails(Long id, Student updatedStudent) {
         Student student = studentRepository.findById(id).orElse(null);
         if (student != null) {
             student.setFirstName(updatedStudent.getFirstName());
@@ -49,7 +49,7 @@ public class StudentService {
         return null;
     }
 
-    public Student assignStudentToDepartment(int studentId, Long departmentId) {
+    public Student assignStudentToDepartment(Long studentId, Long departmentId) {
         Student student = studentRepository.findById(studentId).orElse(null);
         if (student != null) {
             Department department = departmentRepository.findById(departmentId).orElse(null);
@@ -59,7 +59,7 @@ public class StudentService {
         return null;
     }
 
-    public boolean deleteStudent(int id) {
+    public boolean deleteStudent(Long id) {
         if (studentRepository.existsById(id)) {
             studentRepository.deleteById(id);
             return true;

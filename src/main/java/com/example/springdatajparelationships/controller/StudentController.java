@@ -44,19 +44,19 @@ public class StudentController {
 
     //update
     @PutMapping("/updatestudent/{id}")
-    public Student updateStudent(@PathVariable int id, @RequestBody Student student) {
+    public Student updateStudent(@PathVariable long id, @RequestBody Student student) {
         return studentService.updateDetails(id, student);
     }
 
     @PutMapping("/assign/{studentId}/department/{departmentId}")
     public Student assignStudentToDepartment(
-            @PathVariable int studentId,
+            @PathVariable long studentId,
             @PathVariable Long departmentId) {
         return studentService.assignStudentToDepartment(studentId, departmentId);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteStudent(@PathVariable int id) {
+    public String deleteStudent(@PathVariable Long id) {
         boolean deleted = studentService.deleteStudent(id);
         if (deleted) {
             return "Student deleted successfully!";
